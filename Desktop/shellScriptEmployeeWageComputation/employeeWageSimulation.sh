@@ -7,19 +7,19 @@ while [[ $i -le 10 ]]
 do
 	randomCheck=$(( RANDOM%3 ))
 case $randomCheck  in
-							1)
-								echo "Employee is Present For Full Time"
-								(( workingDays++ ))
-								totaldDailyWage=$(( totaldDailyWage+20*8 ))
-								;;
-							0)
-								echo "Employee is Absent"
-								;;
-							2)
-      						echo "Employee Present for Part Time"
-       						(( workingDays++ ))
-       						totaldDailyWage=$(( totaldDailyWage+20*4 ))
-								;;
+						1)
+							echo "Employee is Present For Full Time"
+							(( workingDays++ ))
+							totaldDailyWage=$(( totaldDailyWage+20*8 ))
+							;;
+						0)
+							echo "Employee is Absent"
+							;;
+						2)
+      					echo "Employee Present for Part Time"
+       					(( workingDays++ ))
+       					totaldDailyWage=$(( totaldDailyWage+20*4 ))
+							;;
 esac
 (( i++ ))
 done
