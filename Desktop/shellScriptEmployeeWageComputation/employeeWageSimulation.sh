@@ -5,15 +5,19 @@ dailyWage=0
 workingDays=0
 while [[ $i -le 10 ]]
 do
-	randomCheck=$(( RANDOM%2 ))
-	if [ $randomCheck -ge 1 ]
+	randomCheck=$(( RANDOM%3 ))
+	if [ $randomCheck -eq 1 ]
 	then
-		echo "Employee is Present"
+		echo "Employee is Present For Full Time"
 		(( workingDays++ ))
 		totaldDailyWage=$(( totaldDailyWage+20*8 ))
 	elif [ $randomCheck -eq 0 ]
 	then
 		echo "Employee is Absent"
+	else
+      echo "Employee Present for Part Time"
+       (( workingDays++ ))
+       totaldDailyWage=$(( totaldDailyWage+20*4 ))
 	fi
 	(( i++ ))
 done
