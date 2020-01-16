@@ -23,13 +23,20 @@ function getWorkingHours()
 	esac
 	echo $working_Hours
 }
+function calculate_Total_Wage()
+{
+	working_Hours=$1
+	wage=$(( $working_Hours*20 ))
+	echo $wage
+}
 while [[ $total_Working_Hours -lt 100 && $working_Days -lt 20 ]]
 do
 	(( working_Days++ ))
 	working_Hours="$( getWorkingHours $((RANDOM%3)) )"
 	echo  "Working Houers"$working_Hours
-
 	total_Working_Hours=$(( $total_Working_Hours+$working_Hours ))
+	emplyee_Daily_Wage[$total_Working_Hours]="$( calculate_Total_Wage $working_Hours)" 
 done
 salary=$(( $employee_Rate_Per_Hour*$total_Working_Hours ))
 echo $salary
+echo ${emplyee_Daily_Wage[@]}
