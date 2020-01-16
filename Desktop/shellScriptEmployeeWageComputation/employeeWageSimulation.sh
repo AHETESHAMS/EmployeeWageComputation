@@ -1,31 +1,35 @@
 #!/bin/bash -x
-echo "Welcome To Employee Wage...."
-dailyWage=0
-workingDays=0
-workHours=0
-while [[ $workingDays -lt 20 && $workHours -lt 100 ]]
+present_For_FullTime=1
+present_For_Part_Time=2
+working_Hours=0
+working_Days=0
+total_Working_Hours=0
+total_Working_Days=0
+employee_Rate_Per_Hour=20
+function getWorkingHours()
+{
+	case $1 in
+		$present_For_FullTime)
+			working_Hours=8
+			
+			;;
+		$present_For_Part_Time)
+			working_Hours=4
+		
+			;;
+		*)
+			working_Hours=0
+			;;
+	esac
+	echo $working_Hours
+}
+while [[ $total_Working_Hours -lt 100 && $working_Days -lt 20 ]]
 do
-	randomCheck=$(( RANDOM%3 ))
-case $randomCheck  in
-	1)
-		echo "Employee is Present For Full Time"
-		(( workingDays++ ))
-		workHours=$(( workHours+8 ))
-		totaldDailyWage=$(( totaldDailyWage+20*8 ))
-		;;
-	0)
-		echo "Employee is Absent"
-		;;
-	2)
-      echo "Employee Present for Part Time"
-      (( workingDays++ ))
-		 workHours=$(( workHours+4 ))
-      totaldDailyWage=$(( totaldDailyWage+20*4 ))
-		;;
-esac
-(( i++ ))
-done
-echo "Total Working Days are:-"$workingDays
-echo "Total Working Hours are :-"$workHours
-echo "Total Wage is:-"$totaldDailyWage
+	(( working_Days++ ))
+	working_Hours="$( getWorkingHours $((RANDOM%3)) )"
+	echo  "Working Houers"$working_Hours
 
+	total_Working_Hours=$(( $total_Working_Hours+$working_Hours ))
+done
+salary=$(( $employee_Rate_Per_Hour*$total_Working_Hours ))
+echo $salary
